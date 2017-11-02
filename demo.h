@@ -52,12 +52,12 @@ void test()
 	bus.subscribe<BEvent>(&b, &OB::onBEvent);
 
 	AEvent aevent;
-	bus.emit<AEvent>(&aevent);
+	bus.emit(&aevent);
 
 	BEvent bevent;
-	bus.emit<BEvent>(&bevent);
+	bus.emit(&bevent);
 
 	bus.unSubcribe<AEvent>(&a, &OA::onAEvent);
-	bus.emit<AEvent>(&aevent);
+	bus.emit(&aevent);
 
 }
