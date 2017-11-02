@@ -1,7 +1,6 @@
 #pragma once
 
 #include "eventbus.h"
-
 #include <iostream>
 
 class AEvent :public Event<AEvent>
