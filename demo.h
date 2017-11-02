@@ -24,63 +24,40 @@ public:
 		std::cout << (" OA catchEvent onBEvent") << std::endl;
 	}
 };
-/* 
-class OB : public Observer
-{
+ 
+class OB  {
 public:
-	void catchEvent(BaseEvent* e)
+	void onAEvent(AEvent* event)
 	{
-		if (e->getMyType() == Event_A)
-		{
-			std::cout << (" OB catchEvent Event_A") << std::endl;
-		}
-		else if (e->getMyType() == Event_B)
-		{
-			std::cout << (" OB catchEvent Event_B") << std::endl;
-		}
+		std::cout << (" OB catchEvent onAEvent") << std::endl;
+	}
+	void onBEvent(BEvent* event)
+	{
+		std::cout << (" OB catchEvent onBEvent") << std::endl;
 	}
 };
  
-class OC : public Observer
-{
-public:
-	void catchEvent(BaseEvent* e)
-	{
-		if (e->getMyType() == Event_A)
-		{
-			std::cout << (" OC catchEvent Event_A") << std::endl;
-		}
-		else if (e->getMyType() == Event_B)
-		{
-			std::cout << (" OC catchEvent Event_B") << std::endl;
-		}
-	}
-};
-*/
 void test()
 {
 	
 	EventBus bus;
 	 
 	OA a;
+	OB b;
+//	OC c;
  
 	bus.subscribe<AEvent>(&a, &OA::onAEvent);
 	bus.subscribe<BEvent>(&a, &OA::onBEvent);
-	//sys.addObserver(&a, Event_A);
-	//sys.addObserver(&a, Event_B);
-
-	//sys.addObserver(&b, Event_A);
-	//sys.addObserver(&c, Event_A);
+	bus.subscribe<AEvent>(&b, &OB::onAEvent);
+	bus.subscribe<BEvent>(&b, &OB::onBEvent);
 
 	AEvent aevent;
- 
- 
 	bus.emit<AEvent>(&aevent);
 
-	 
+	BEvent bevent;
+	bus.emit<BEvent>(&bevent);
+
 	bus.unSubcribe<AEvent>(&a, &OA::onAEvent);
 	bus.emit<AEvent>(&aevent);
 
- 
-	 
 }

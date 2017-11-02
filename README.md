@@ -1,30 +1,63 @@
-# eventManager
-c++ Publish/Subscribe event system 
+#pragma once
+#include "eventbus.h"
+#include <iostream>
+class AEvent :public Event<AEvent>
+{
+ 
+};
 
-demo here:
+class BEvent :public Event<BEvent>
+{
+ 
+};
+
+/**/
+class OA  
+{
+public:
+	void onAEvent(AEvent* event)
+	{
+		std::cout << (" OA catchEvent onAEvent") << std::endl;
+	}
+	void onBEvent(BEvent* event)
+	{
+		std::cout << (" OA catchEvent onBEvent") << std::endl;
+	}
+};
+ 
+class OB  {
+public:
+	void onAEvent(AEvent* event)
+	{
+		std::cout << (" OB catchEvent onAEvent") << std::endl;
+	}
+	void onBEvent(BEvent* event)
+	{
+		std::cout << (" OB catchEvent onBEvent") << std::endl;
+	}
+};
+ 
 void test()
 {
-	Observed sys;
-
+	
+	EventBus bus;
+	 
 	OA a;
 	OB b;
-	OC c;
 
-	sys.addObserver(&a, Event_A);
-	sys.addObserver(&a, Event_B);
-
-	sys.addObserver(&b, Event_A);
-	sys.addObserver(&c, Event_A);
+ 
+	bus.subscribe<AEvent>(&a, &OA::onAEvent);
+	bus.subscribe<BEvent>(&a, &OA::onBEvent);
+	bus.subscribe<AEvent>(&b, &OB::onAEvent);
+	bus.subscribe<BEvent>(&b, &OB::onBEvent);
 
 	AEvent aevent;
-	std::cout << ("1 sendEvent Event_A") << std::endl;
- 
-	sys.sendEvent(&aevent);
+	bus.emit<AEvent>(&aevent);
 
-	std::cout << ("2 OA removeObserver Event_A") << std::endl;
-	sys.removeObserver(&a, Event_A);
-	AEvent aevent1;
-	std::cout << ("  sendEvent Event_A") << std::endl;
-	 
-	sys.sendEvent(&aevent1);
+	BEvent bevent;
+	bus.emit<BEvent>(&bevent);
+
+	bus.unSubcribe<AEvent>(&a, &OA::onAEvent);
+	bus.emit<AEvent>(&aevent);
+
 }
