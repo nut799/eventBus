@@ -53,11 +53,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\;..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\;..\..\;..\..\googletest\googletest\include;..\..\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>gtestd.lib;gmock.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\googletest\googletest\msvc\2010\gtest\Win32-Debug;..\..\googletest\googlemock\msvc\2010\Win32-Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,10 +88,14 @@
     <ClInclude Include="..\..\demo.h" />
     <ClInclude Include="..\..\eventbus.h" />
     <ClInclude Include="..\catch.hpp" />
+    <ClInclude Include="..\gmock_catch_interceptor.hpp" />
+    <ClInclude Include="..\interfaces.h" />
+    <ClInclude Include="..\mocks.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\gmock_catch_interceptor.cpp" />
     <ClCompile Include="..\test.cpp" />
     <ClCompile Include="..\tests-eventbus.cpp" />
     <ClCompile Include="stdafx.cpp" />

@@ -33,6 +33,15 @@
     <ClInclude Include="..\..\demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\gmock_catch_interceptor.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mocks.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\interfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gmock_catch_interceptor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
