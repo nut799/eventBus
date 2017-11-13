@@ -7,7 +7,7 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	test();
+	demo();
 	char c;
 	std::cin >> c;
 	return 0;

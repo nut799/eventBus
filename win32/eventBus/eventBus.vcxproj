@@ -83,11 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\demo.h" />
-    <ClInclude Include="..\..\eventbus.h" />
+    <ClInclude Include="..\..\Eventbus.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\EventBus.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>

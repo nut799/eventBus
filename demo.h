@@ -1,12 +1,12 @@
 #pragma once
-#include "eventbus.h"
+#include "Eventbus.h"
 #include <iostream>
-class AEvent :public Event<AEvent>
+class AEvent :public EV<AEvent>
 {
  
 };
 
-class BEvent :public Event<BEvent>
+class BEvent :public EV<BEvent>
 {
  
 };
@@ -37,27 +37,26 @@ public:
 	}
 };
  
-void test()
+void demo()
 {
-	
-	EventBus bus;
+	//EventBus bus;
 	 
 	OA a;
 	OB b;
 //	OC c;
  
-	bus.subscribe<AEvent>(&a, &OA::onAEvent);
-	bus.subscribe<BEvent>(&a, &OA::onBEvent);
-	bus.subscribe<AEvent>(&b, &OB::onAEvent);
-	bus.subscribe<BEvent>(&b, &OB::onBEvent);
+	EventBus::getInstance()->subscribe<AEvent>(&a, &OA::onAEvent);
+	EventBus::getInstance()->subscribe<BEvent>(&a, &OA::onBEvent);
+	EventBus::getInstance()->subscribe<AEvent>(&b, &OB::onAEvent);
+	EventBus::getInstance()->subscribe<BEvent>(&b, &OB::onBEvent);
 
 	AEvent aevent;
-	bus.emit(&aevent);
+	EventBus::getInstance()->emit(&aevent);
 
 	BEvent bevent;
-	bus.emit(&bevent);
+	EventBus::getInstance()->emit(&bevent);
 
-	bus.unSubcribe<AEvent>(&a, &OA::onAEvent);
-	bus.emit(&aevent);
+	EventBus::getInstance()->unSubcribe<AEvent>(&a, &OA::onAEvent);
+	EventBus::getInstance()->emit(&aevent);
 
 }

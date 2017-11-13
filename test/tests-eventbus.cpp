@@ -1,6 +1,6 @@
 
 #include "catch.hpp"
-#include "eventbus.h"
+#include "Eventbus.h"
 #include "mocks.hpp"
 
 SCENARIO("checking eventbus", "[eventbus]") {
