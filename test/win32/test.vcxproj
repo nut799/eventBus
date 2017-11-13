@@ -87,8 +87,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\demo.h" />
     <ClInclude Include="..\..\Eventbus.h" />
-    <ClInclude Include="..\catch.hpp" />
-    <ClInclude Include="..\gmock_catch_interceptor.hpp" />
     <ClInclude Include="..\interfaces.h" />
     <ClInclude Include="..\mocks.hpp" />
     <ClInclude Include="stdafx.h" />
@@ -96,7 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\EventBus.cpp" />
-    <ClCompile Include="..\gmock_catch_interceptor.cpp" />
     <ClCompile Include="..\test.cpp" />
     <ClCompile Include="..\tests-eventbus.cpp" />
     <ClCompile Include="stdafx.cpp" />

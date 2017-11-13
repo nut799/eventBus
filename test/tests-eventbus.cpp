@@ -1,38 +1,33 @@
-
-#include "catch.hpp"
 #include "Eventbus.h"
 #include "mocks.hpp"
 
-SCENARIO("checking eventbus", "[eventbus]") {
-	GIVEN("OA with register AEvent") {
-		EventBus bus;
- 
-		WHEN("when subscribe AEvent"){
-			mockOA mockOA;
-			bus.subscribe<AEvent>(&mockOA, &mockOA::onAEvent);
-
-			THEN("the OA onAEvent() will be called") {
-				EXPECT_CALL(mockOA, onAEvent(testing::_)).Times(::testing::AtLeast(1));
-				AEvent aevent;
-				bus.emit(&aevent);
-			}
-			bus.unSubcribe<AEvent>(&mockOA, &mockOA::onAEvent);
-			SUCCEED();
-		}
-		 
-		WHEN("when unSubcribe AEvent"){
-			mockOA mockOA;
-			bus.subscribe<AEvent>(&mockOA, &mockOA::onAEvent);
-			bus.unSubcribe<AEvent>(&mockOA, &mockOA::onAEvent);
-			THEN("the OA onAEvent() will not be called") {
-				EXPECT_CALL(mockOA, onAEvent(testing::_)).Times(0);
-				AEvent aevent;
-				bus.emit(&aevent);
-			}
-			 
-			SUCCEED();
-		}
-	 
+class EventBus_Test : public testing::Test {
+	virtual void SetUp(){
+		bus = EventBus::getInstance();
 	}
+
+	virtual void TearDown(){
+		bus = nullptr;
+	}
+protected:
+	mockOA mockObserver;//call back 
+	EventBus* bus;
+};
+
+TEST_F(EventBus_Test, Subscribe_Triger_callback){
+	bus->subscribe<AEvent>(&mockObserver, &mockOA::onAEvent);
+	EXPECT_CALL(mockObserver, onAEvent(testing::_)).Times(::testing::AtLeast(1));
+
+	AEvent aevent;
+	bus->emit(&aevent);
+	bus->unSubcribe<AEvent>(&mockObserver, &mockOA::onAEvent);
 }
- 
+
+TEST_F(EventBus_Test, Unsubscribe_Should_Not_Triger_callback){
+	bus->subscribe<AEvent>(&mockObserver, &mockOA::onAEvent);
+	bus->unSubcribe<AEvent>(&mockObserver, &mockOA::onAEvent);
+	EXPECT_CALL(mockObserver, onAEvent(testing::_)).Times(0);
+
+	AEvent aevent;
+	bus->emit(&aevent);
+}

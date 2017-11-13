@@ -73,6 +73,8 @@
 	{
 	private:
 		static EventBus* Instance;
+		EventBus(){}
+		~EventBus(){}
 		std::vector<std::list<BaseEventHandler*>> m_subscribers;
 	public:
 		template<typename EventType, typename T, typename F>

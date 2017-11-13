@@ -24,14 +24,8 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\catch.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\demo.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\gmock_catch_interceptor.hpp">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\mocks.hpp">
       <Filter>Source Files</Filter>
@@ -51,9 +45,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gmock_catch_interceptor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\EventBus.cpp">
