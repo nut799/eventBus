@@ -39,24 +39,24 @@ public:
  
 void demo()
 {
-	//EventBus bus;
+	EventBus bus;
 	 
 	OA a;
 	OB b;
 //	OC c;
  
-	EventBus::getInstance()->subscribe<AEvent>(&a, &OA::onAEvent);
-	EventBus::getInstance()->subscribe<BEvent>(&a, &OA::onBEvent);
-	EventBus::getInstance()->subscribe<AEvent>(&b, &OB::onAEvent);
-	EventBus::getInstance()->subscribe<BEvent>(&b, &OB::onBEvent);
+	bus.subscribe<AEvent>(&a, &OA::onAEvent);
+	bus.subscribe<BEvent>(&a, &OA::onBEvent);
+	bus.subscribe<AEvent>(&b, &OB::onAEvent);
+	bus.subscribe<BEvent>(&b, &OB::onBEvent);
 
 	AEvent aevent;
-	EventBus::getInstance()->emit(&aevent);
+	bus.emit(&aevent);
 
 	BEvent bevent;
-	EventBus::getInstance()->emit(&bevent);
+	bus.emit(&bevent);
 
-	EventBus::getInstance()->unSubcribe<AEvent>(&a, &OA::onAEvent);
-	EventBus::getInstance()->emit(&aevent);
+	bus.unSubcribe<AEvent>(&a, &OA::onAEvent);
+	bus.emit(&aevent);
 
 }

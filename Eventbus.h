@@ -71,10 +71,6 @@
 
 	class EventBus
 	{
-	private:
-		static EventBus* Instance;
-		EventBus(){}
-		~EventBus(){}
 		std::vector<std::list<BaseEventHandler*>> m_subscribers;
 	public:
 		template<typename EventType, typename T, typename F>
@@ -136,11 +132,6 @@
 				base->invoke(event);
 			}
 		}
-
-	public:
-		static EventBus* getInstance();
-
-		static void delInstance();
 	};
 
  
