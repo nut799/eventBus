@@ -1,3 +1,9 @@
+EventBus 
+=====
+
+#demo
+
+```
 #pragma once
 #include <iostream>
 #include "eventbus.h"
@@ -13,7 +19,6 @@ class BEvent :public Event<BEvent>
  
 };
 
-/**/
 class OA  
 {
 public:
@@ -46,7 +51,6 @@ void test()
 	 
 	OA a;
 	OB b;
-
  
 	bus.subscribe<AEvent>(&a, &OA::onAEvent);
 	bus.subscribe<BEvent>(&a, &OA::onBEvent);
@@ -61,5 +65,7 @@ void test()
 
 	bus.unSubcribe<AEvent>(&a, &OA::onAEvent);
 	bus.emit<AEvent>(&aevent);
-
 }
+```
+
+#UT
